@@ -173,4 +173,5 @@ Should I re-run the search with a smaller time window (Enter to skip)? [ Enter ]
 ```
 
 ## Authors and Contact
+Gruppe 19
 
