@@ -30,14 +30,14 @@ Returns:
     delta = np.timedelta64(length - 1, interval)
     
 
-    #take only the columns of people that were specified by user input
+    # take only the columns of people that were specified by user input
     data = data[persons]
 
-    #create a new data frame with columns: 
-    # - start date
-    # - amount of people
-    # - sum of availability weights of all by user named people
-    # - names of named people
+    # create a new data frame with columns: 
+    #  - start date
+    #  - amount of people
+    #  - sum of availability weights of all by user named people
+    #  - names of named people
     df_results = pd.DataFrame(columns = ['date', 'count', 'weight', 'people'])
     df_results['count'] = pd.to_numeric(df_results['count'])
     df_results['weight'] = pd.to_numeric(df_results['weight'])
@@ -87,10 +87,10 @@ if __name__ == "__main__":
     solution = solve(data,  necessary, persons = persons, length = time[0], interval = time[1])
 
 
-    #to ensure a reasonable output is created, distinguish between:
-    # - up to three solutions perfectly fitting all constraints
-    # - up to three solutions that fits all constraints except the optional people
-    # - no solution possible under given constraints
+    # to ensure a reasonable output is created, distinguish between:
+    #  - up to three solutions perfectly fitting all constraints
+    #  - up to three solutions that fits all constraints except the optional people
+    #  - no solution possible under given constraints
     while time[0] >= 0:
         if not solution.empty:
             if len(solution['people'].iloc[0]) < len(persons):
@@ -119,6 +119,6 @@ if __name__ == "__main__":
                 print(f"Trying with {tools.reformat_date(time)}")
                 solution = solve(data, necessary, persons, length = time[0], interval = time[1])
             
-            #otherwise: end program
+            # otherwise: end program
             else: break
 

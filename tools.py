@@ -3,30 +3,30 @@ import re
 def clean_date(input):
 
     """
-Turns input such as '2 weeks' or '5 days' into tuple of the form (Amount, 'W' or 'D')
+Turns input such as '2 weeks' or '5 days' into list of the form (Amount, 'W' or 'D')
 Can also be used to check correct shape of input string
 
 Parameters:
 input (str): wanted timeframe expressed in natural language
 
 Returns:
-(tuple): (int, 'W') or (int, 'D')
+(list): (int, 'W') or (int, 'D')
 If transformation not possible, return False
 
 """
 
-    #make all letters of the input all lower case
+    # make all letters of the input all lower case
     input = input.lower()
 
-    #finds words to match from a natural language string
-    #library re is used, a module that provides regular expression matching operations 
-    #natural language <-> variable coversion tool 
+    # finds words to match from a natural language string
+    # library re is used, a module that provides regular expression matching operations 
+    # natural language <-> variable coversion tool 
     digits = re.findall(r'\b\d+\b', input)
     if len(digits) != 1:
         return False
 
-    #unifies input with same meaning to one identifier, for easier usage
-    #for example, anything that means 'week' is turned into 'W', to be clearily identified
+    # unifies input with same meaning to one identifier, for easier usage
+    # for example, anything that means 'week' is turned into 'W', to be clearily identified
     if input.endswith(' week') or input.endswith(' weeks') or input.endswith(' w'):
         return [int(digits[0]), 'W']
     if input.endswith(' day') or input.endswith(' days') or input.endswith(' d'):
@@ -38,11 +38,11 @@ If transformation not possible, return False
 def reformat_date(input):
 
     """
-Turn tuple of the form (Amount, 'W' or 'D') into natural language timeframe (such as '2 weeks' or '5 days')
+Turn list of the form (Amount, 'W' or 'D') into natural language timeframe (such as '2 weeks' or '5 days')
 to make the output more understandable for the user.
 
 Parameters:
-input (tuple): (int, 'W') or (int, 'D')
+input (list): (int, 'W') or (int, 'D')
 
 Returns:
 formatted (str):  timeframe expressed in natural language

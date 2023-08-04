@@ -109,7 +109,7 @@ people (list): names of all people named by user
         check = True
     print()
 
-    #part 2: names of people and constraint on which name is necessary to appear in solution
+    # part 2: names of people and constraint on which name is necessary to appear in solution
     people = []
     necessary = []
     i = 0
