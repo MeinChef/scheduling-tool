@@ -15,23 +15,31 @@ If transformation not possible, return False
 
 """
 
+    #make all letters of the input all lower case
     input = input.lower()
 
+    #finds words to match from a natural language string
+    #library re is used, a module that provides regular expression matching operations 
+    #natural language <-> variable coversion tool 
     digits = re.findall(r'\b\d+\b', input)
     if len(digits) != 1:
         return False
 
+    #unifies input with same meaning to one identifier, for easier usage
+    #for example, anything that means 'week' is turned into 'W', to be clearily identified
     if input.endswith(' week') or input.endswith(' weeks') or input.endswith(' w'):
-        return int(digits[0]), 'W'
+        return [int(digits[0]), 'W']
     if input.endswith(' day') or input.endswith(' days') or input.endswith(' d'):
-        return int(digits[0]), 'D'
+        return [int(digits[0]), 'D']
     
     return False
+
 
 def reformat_date(input):
 
     """
 Turn tuple of the form (Amount, 'W' or 'D') into natural language timeframe (such as '2 weeks' or '5 days')
+to make the output more understandable for the user.
 
 Parameters:
 input (tuple): (int, 'W') or (int, 'D')
@@ -45,7 +53,8 @@ formatted (str):  timeframe expressed in natural language
         formatted = f'{input[0]} ' + 'week'
     elif input[1] == 'D':
         formatted = f'{input[0]} ' + 'day'
-        
+    
+    #consider plurals
     if input[0] > 1:
         formatted = formatted + 's'
     
@@ -70,6 +79,7 @@ Returns:
         print('The specified Person(s) do not exist in the database!')
         return False
     
+
 def valid_date(data, date):
 
     """
@@ -86,6 +96,7 @@ Returns:
 
     if date in data.index: return True
     else: return False
+
 
 def valid_file(string):
 

@@ -5,7 +5,13 @@ import tools
 
 def solve(data, necessary, persons, startdate = np.datetime64('2023-08-01'), length = 6, interval = 'D'):
     """
-[Beschreibung]
+Searches a solution for a timeframe considering the given constraints.
+
+Constraint options: 
+- necessary people
+- ideally included people
+- start date
+- timeframe length 
 
 Parameters:
 data (pandas DataFrame): contains processed data from .csv
@@ -16,40 +22,49 @@ length (int) = custom or preset length of timeframe
 daterange (str) = custom ('D'/'W') or preset ('D') quantifier for length (Day/ Week)
 
 Returns:
-[Output]
+3 top rows of a pandas DataFrame df_results
 
 """
 
+    # the -1 because e.g. 07-01 + 6 days = 07-07, which would return 7 days, but 6 were expected
     delta = np.timedelta64(length - 1, interval)
-    # the -1 because e.g. 07-01 + 6 days = 07-07, was 7 Tage sind, und nicht 6, wie wir eigentlich wollten
+    
 
-        
+    #take only the columns of people that were specified by user input
     data = data[persons]
 
+    #create a new data frame with columns: 
+    # - start date
+    # - amount of people
+    # - sum of availability weights of all by user named people
+    # - names of named people
     df_results = pd.DataFrame(columns = ['date', 'count', 'weight', 'people'])
     df_results['count'] = pd.to_numeric(df_results['count'])
     df_results['weight'] = pd.to_numeric(df_results['weight'])
     
+    # loop over all possible dates - ranging from the stardate to the last date - timedelta
     for i in np.arange(np.datetime64(startdate), np.datetime64(data.index[-1] - delta, 'D'), dtype = 'datetime64[D]'):
         
         counter = 0
         weight = 0
         people = []
 
+        # loop over person list:
         for person in persons:
+
+            # if the product of the column window from i to i+delta is not 0, we found a date, where the person is avaliable for the timedelta
             if data[person][i :i + delta].product() != 0:
+
+                # increase counter, weight, add to "people" list, to save them in the df_result
                 counter += 1
                 people.append(person)
                 weight += data[person][i :i + delta].product()
             
-         
-        if all(item in people for item in necessary) and counter != 0:
-            if counter == len(persons):
-                # we actually found solutions fitting to the query
-                df_results = df_results._append({'date': i, 'count': counter, 'weight': weight, 'people': people}, ignore_index = True)
+        
+        # if all neccessary ppl are in the people list, and there is at least one person avaliable:
+        if all(item in people for item in necessary) and counter > 0:
             
-            else:
-                # we didn't find solutions for the query, but we're keeping track of all possibilities - and will return the one with the highest value
+                # saving all possibilities
                 df_results = df_results._append({'date': i, 'count': counter, 'weight': weight, 'people': people}, ignore_index = True)
 
     return df_results.nlargest(3, ['count', 'weight'])
@@ -68,13 +83,16 @@ if __name__ == "__main__":
     persons, necessary, time, startdate = gi.get_constraints(data)
 
     solution = solve(data,  necessary, persons = persons, length = time[0], interval = time[1])
-    print()
 
 
+    #to ensure a reasonable output is created, distinguish between:
+    # - up to three solutions perfectly fitting all constraints
+    # - up to three solutions that fits all constraints except the optional people
+    # - no solution possible under given constraints
     while time[0] >= 0:
         if not solution.empty:
             if len(solution['people'].iloc[0]) < len(persons):
-                print("I wasn't able to find a solution tht includes everyone. Here is the best timeframe I was able to find: ")
+                print("I wasn't able to find a solution that includes everyone. Here is the best timeframe I was able to find: ")
             if len(solution['people'].iloc[0]) > 1:
                 print(f"From the {solution['date'].iloc[0]} on, there are {solution['count'].iloc[0]} people free for {tools.reformat_date(time)}.\n\rThese people are: {solution['people'].iloc[0]}\n\r")
                 print(f"Here\'s also up to 3 best fitting solutions:")
@@ -84,61 +102,21 @@ if __name__ == "__main__":
                 print(f"Here\'s also up to 3 best fitting solutions:")
                 print(solution[['date', 'count', 'people']])
             break       
-
+        
+        # and if there is no solution:
         else:
             print("There is no solution with your constraints.\n\r")
+            # ask for rerun with decreased timeframe
             re_run = input("Should I re-run the search with a smaller time window (Enter to skip)? ")
+            
+            # if one wants to rerun
             if re_run:
-                time =  list(time)
+                
+                # reduce timeframe
                 time[0] = time[0]-1
                 print(f"Trying with {tools.reformat_date(time)}")
                 solution = solve(data, necessary, persons, length = time[0], interval = time[1])
-
+            
+            #otherwise: end program
             else: break
 
-    ###############TODO#######################
-    
-
-    # comments
-
-    
-    
-    # From grading pdf:
-        # docstrings for all functions
-        # There are instructions for the intended usage of the project
-    
-    # maybe:
-
-        # include where constraint conflict is in "There is no solution with your constraints." - difficult, rejected
-        
-
-    # done
-        # ! get different output, if solutions can't give a definite solution
-        # ! fix output, that it outputs "6 Days" instead of (6, 'D')
-        # ! fix default value of startdate not working
-        #! fix bugs in get_input.py (while loop where date gets asked for (wrong format))
-        # print persons that are avaliable to choose from
-        # rename 'availabiltiy' column to something meaningful
-        # solver does not necessarily inlcude 'Who should be the one I need to include in the planning'
-        # solver skips necessary if typed wrong 1 time
-        # show available timeframe
-        # rewrite: Who should be the one I need to include in the planning?
-        # solver must include specified persons (as in A and B must be there, C,D,E not necessarily) [DONE]
-        # solver does not necessarily inlcude all [DoNE]
-        # load own csv?
-        #cursed !Do you want to input user data (Enter to skip)? 
-        # timeframe input allow currencly for '8 weekyetts' or '5 dayyoinks'
-        # load own csv: proper pandas convert check 
-        # you can specify needed > total - bad!
-        # refine how mny ppl do you want to add for ambiguity
-        # give mulitple possible time frames - per default 3
-        # sort dataframe by weight
-        # weight values and implement function to actually work with them
-        # Maybe: option of giving shorter timeframe from startdate
-
-
-
-
-
-
-    ##########################################

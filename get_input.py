@@ -2,14 +2,6 @@ import tools
 import numpy as np
 import pandas as pd
 
-# basically a function for getting the inputs
-# make sure the input is in the correct format
-
-#################################################
-# one where the user specifies an "after" date (optional) - done
-# one where the user specifies a length of the vacation (13 days, etc) (maybe import the check here as well) - done
-#################################################
-
 
 def load_data(filename):
 
@@ -74,12 +66,25 @@ file (str): processed filename as string
 
 def get_travel_buddies(data):
 
+    """
+Reads user input user input on how long the desired timeframe should be.
+Checks if the input format is correct.
+
+Parameters: 
+data (pandas DataFrame): own or default .csv
+
+Returns: 
+necessary (list): names of necessary people according to user
+people (list): names of all people named by user
+    
+"""
+
     print(f"\n\rTravel buddies are:{data.columns.values.tolist()}\n\r")
 
     check = False
     necessary_num = 0
 
-    # get the number of persons the user wants to add
+    #part 1: number of persons the user wants to add
     while not check:
         length = input('How many Travel Buddies do you want to add to go on vacation? ')
         
@@ -104,6 +109,7 @@ def get_travel_buddies(data):
         check = True
     print()
 
+    #part 2: names of people and constraint on which name is necessary to appear in solution
     people = []
     necessary = []
     i = 0
@@ -126,6 +132,21 @@ def get_travel_buddies(data):
 
 
 def get_timeframe(data):
+
+    """
+    
+Reads user input on how long the desired timeframe should be.
+Checks if the input format is correct.
+
+Parameters: 
+data (pandas DataFrame): own or default .csv
+
+Returns: 
+daterange (tuple): integer of the amount, string of unit ("days" or "weeks")
+
+"""
+
+    
     print(f"The total timeframe available is: {data.index[0]} to {data.index[-1]}")
     check = False
     while not check:
@@ -145,6 +166,18 @@ def get_timeframe(data):
 
 
 def get_startdate(data):
+
+    """
+Reads user input for starting date and checks whether it has the correct format and date range.
+If the start date input is not correct, it gives the user the right hint to correct the input.
+
+Parameters: 
+data (pandas DataFrame): own or default .csv
+
+Returns: 
+startdate: datetime64 string
+
+"""
 
     check = False
     while not check:
@@ -175,7 +208,7 @@ Possible Options:
 Choose whether user wants to pick their own constraints.
 If yes:
 - Ask for amount of people that should be available 
-- Ask for amount of people that NEED be available 
+- Ask for amount of people that NEED to be available 
 - Ask for length of timeframe to be found
 - Ask for custom start date (optional)
 - Check all of the above for valid type
@@ -217,7 +250,7 @@ startdate (np.datetime64): chosen earliest date of the timeframe
         except: print('Warning: You\'re not working with the default dataframe!')
 
         necessary = [data.columns[0]]
-        daterange = (6, 'D')
+        daterange = [6, 'D']
         startdate = data.index[0]
 
     return people, necessary, daterange, startdate
