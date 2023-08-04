@@ -16,7 +16,6 @@ Contained in the repo are:
     - get_input.py
 - Data folder: 
     - Containts premade .csv for trying the tool
-[...]
 
 ### Functionality
 - Input / Optional custom .csv to be loaded (must be in \data folder):
@@ -61,7 +60,8 @@ python scheduling_tool.py
 
 ## Usage examples
 ### 1: Load own csv
-Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+```bash
+"Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
 Do you want to use a custom .csv (Enter to skip)? yes
 What file do you want to load? vacations_w.csv
 My search is based on data/vacations_w.csv. Let us begin!
@@ -89,10 +89,12 @@ Here's also up to 3 best fitting solutions:
          date  count                  people
 32 2023-09-16      3  [Barbie, Mulan, Ariel]
 39 2023-09-23      3  [Barbie, Mulan, Ariel]
-25 2023-09-09      3  [Barbie, Mulan, Ariel]
+25 2023-09-09      3  [Barbie, Mulan, Ariel]"
+```
 
 ### 2: Default csv and default values
-Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+```bash
+"Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
 Do you want to use a custom .csv (Enter to skip)? - [ Enter ]
 My search is based on data/vacations.csv. Let us begin!
 Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - [ Enter ]
@@ -103,10 +105,13 @@ Here's also up to 3 best fitting solutions:
          date  count                                             people
 27 2023-09-22     11  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried...
 24 2023-09-19     10  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried...
-25 2023-09-20     10  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried...
+25 2023-09-20     10  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried..."
+```
+
 
 ### 3: Choose constraint: necessary people (default csv)
-Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+```bash
+"Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
 Do you want to use a custom .csv (Enter to skip)? [ Enter ]
 My search is based on data/vacations.csv. Let us begin!
 Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
@@ -133,10 +138,12 @@ Here's also up to 3 best fitting solutions:
          date  count                        people
 17 2023-09-10      3  [Sigurd, Gunther, Kriemhild]
 18 2023-09-11      3  [Sigurd, Gunther, Kriemhild]
-19 2023-09-12      3  [Sigurd, Gunther, Kriemhild]
+19 2023-09-12      3  [Sigurd, Gunther, Kriemhild]"
+```
 
 ### 4: Constraint violation found (default csv)
-Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+```bash
+"Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
 Do you want to use a custom .csv (Enter to skip)? [ Enter ]
 My search is based on data/vacations.csv. Let us begin!
 Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
@@ -162,7 +169,8 @@ What is the starting date I should start searching from (Enter to use default)? 
 
 There is no solution with your constraints.
 
-Should I re-run the search with a smaller time window (Enter to skip)? [ Enter ]
+Should I re-run the search with a smaller time window (Enter to skip)? [ Enter ]"
+```
 
 ## Authors and Contact
 
