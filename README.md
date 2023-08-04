@@ -48,7 +48,7 @@ A working python environment with:
 ### Installation
 Clone the repo
 ```bash
-git clone ___
+git clone https://github.com/MeinChef/scheduling-tool/
 ```
 ## Usage 
 - add your own csv in data folder if wanted
@@ -173,5 +173,5 @@ Should I re-run the search with a smaller time window (Enter to skip)? [ Enter ]
 ```
 
 ## Authors and Contact
-Gruppe 19
+Group 19
 
