@@ -76,9 +76,11 @@ Returns:
 
 if __name__ == "__main__":
 
+    print("Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.")
+
     data, file = gi.transform_and_load()
     
-    print(f"Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.\n\rMy search is based on {file}. Let us begin!\n\r")
+    print(f"My search is based on {file}. Let us begin!")
     
     persons, necessary, time, startdate = gi.get_constraints(data)
 

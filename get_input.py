@@ -118,7 +118,7 @@ people (list): names of all people named by user
         if i < necessary_num:
             person = input('Who is necessary in the planning ? ')
         else:
-            person = input('Who else should be added, who doesn\'t need to be there? ') 
+            person = input('Who else should be added that doesn\'t necessarily need to be there? ') 
         if tools.valid_persons(data, [person]):
             if person not in people:
                 people.append(person)
@@ -231,7 +231,7 @@ startdate (np.datetime64): chosen earliest date of the timeframe
 """
 
 
-    skip = input('Do you want to specify custom persons and times? (Enter to use defaults) ')
+    skip = input('Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) ')
     
     if skip:
 

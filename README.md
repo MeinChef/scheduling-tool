@@ -58,10 +58,111 @@ Execute in working directory:
 ```bash
 python scheduling_tool.py
 ```
-[add usage examples - possible user adjustments
-- own csv
-- premade csv
-- choosing necessary people
-- constraint violation vs. timeframe found]
+
+## Usage examples
+### 1: Load own csv
+Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+Do you want to use a custom .csv (Enter to skip)? yes
+What file do you want to load? vacations_w.csv
+My search is based on data/vacations_w.csv. Let us begin!
+Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) yes
+
+Travel buddies are:['Barbie', 'Ken', 'Jasmine', 'Merida', 'Cinderella', 'Charming', 'Belle', 'Ariel', 'Pocahontas', 'Elsa', 'Aurora', 'Mulan']
+
+How many Travel Buddies do you want to add to go on vacation? 3
+How many people of those need be present? 0
+
+Please add names one after the other:
+Who else should be added that doesn't necessarily need to be there? Barbie
+Who else should be added that doesn't necessarily need to be there? Mulan
+Who else should be added that doesn't necessarily need to be there? Ariel
+
+The total timeframe available is: 2023-07-20 00:00:00 to 2023-10-15 00:00:00
+For how long should the people be available (Enter to use default (6 days))? 4 days
+
+What is the starting date I should start searching from (Enter to use default)?
+
+From the 2023-09-16 00:00:00 on, there are 3 people free for 4 days.
+These people are: ['Barbie', 'Mulan', 'Ariel']
+
+Here's also up to 3 best fitting solutions:
+         date  count                  people
+32 2023-09-16      3  [Barbie, Mulan, Ariel]
+39 2023-09-23      3  [Barbie, Mulan, Ariel]
+25 2023-09-09      3  [Barbie, Mulan, Ariel]
+
+### 2: Default csv and default values
+Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+Do you want to use a custom .csv (Enter to skip)? - [ Enter ]
+My search is based on data/vacations.csv. Let us begin!
+Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - [ Enter ]
+From the 2023-09-22 00:00:00 on, there are 11 people free for 6 days.
+These people are: ['Gudrun', 'Dankwart', 'Sigurd', 'Brynhild', 'Siegfried', 'Gernot', 'Gunther', 'Kriemhild', 'Hildebrand', 'Wolfhart', 'Giselher']
+
+Here's also up to 3 best fitting solutions:
+         date  count                                             people
+27 2023-09-22     11  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried...
+24 2023-09-19     10  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried...
+25 2023-09-20     10  [Gudrun, Dankwart, Sigurd, Brynhild, Siegfried...
+
+### 3: Choose constraint: necessary people (default csv)
+Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+Do you want to use a custom .csv (Enter to skip)? [ Enter ]
+My search is based on data/vacations.csv. Let us begin!
+Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
+
+Travel buddies are:['Gudrun', 'Dankwart', 'Sigurd', 'Brynhild', 'Siegfried', 'Gernot', 'Gunther', 'Kriemhild', 'Hildebrand', 'Wolfhart', 'Alberich', 'Giselher']
+
+How many Travel Buddies do you want to add to go on vacation? - 3
+How many people of those need be present? - 1
+
+Please add names one after the other:
+Who is necessary in the planning ? - Sigurd
+Who else should be added that doesn't necessarily need to be there? - Gunther
+Who else should be added that doesn't necessarily need to be there? - Kriemhild
+
+The total timeframe available is: 2023-07-20 00:00:00 to 2023-10-15 00:00:00
+For how long should the people be available (Enter to use default (6 days))? - 1 week
+
+What is the starting date I should start searching from (Enter to use default)? - 2023-08-03
+
+From the 2023-09-10 00:00:00 on, there are 3 people free for 1 week.
+These people are: ['Sigurd', 'Gunther', 'Kriemhild']
+
+Here's also up to 3 best fitting solutions:
+         date  count                        people
+17 2023-09-10      3  [Sigurd, Gunther, Kriemhild]
+18 2023-09-11      3  [Sigurd, Gunther, Kriemhild]
+19 2023-09-12      3  [Sigurd, Gunther, Kriemhild]
+
+### 4: Constraint violation found (default csv)
+Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
+Do you want to use a custom .csv (Enter to skip)? [ Enter ]
+My search is based on data/vacations.csv. Let us begin!
+Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
+
+Travel buddies are:['Gudrun', 'Dankwart', 'Sigurd', 'Brynhild', 'Siegfried', 'Gernot', 'Gunther', 'Kriemhild', 'Hildebrand', 'Wolfhart', 'Alberich', 'Giselher']
+
+How many Travel Buddies do you want to add to go on vacation? - 5
+How many people of those need be present? - 2
+
+Please add names one after the other:
+Who is necessary in the planning ? - Alberich
+Who is necessary in the planning ? - Sigurd 
+Who else should be added that doesn't necessarily need to be there? - Kriemhild
+Who else should be added that doesn't necessarily need to be there? - Gunther
+Who else should be added that doesn't necessarily need to be there? - Wolfhard
+The specified Person(s) do not exist in the database!
+Who else should be added that doesn't necessarily need to be there? - Wolfhart
+
+The total timeframe available is: 2023-07-20 00:00:00 to 2023-10-15 00:00:00
+For how long should the people be available (Enter to use default (6 days))? - 4 Days
+
+What is the starting date I should start searching from (Enter to use default)? - 2023-08-15
+
+There is no solution with your constraints.
+
+Should I re-run the search with a smaller time window (Enter to skip)? [ Enter ]
+
 ## Authors and Contact
 
