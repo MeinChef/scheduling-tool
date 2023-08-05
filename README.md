@@ -1,4 +1,4 @@
-# scipy_project
+# scheduling-tool
 ### Goal
 scheduling_tool.py is a program for dealing with finding an optimal timeslot that fits the availability of a specified amount of people.
 ### Motivation
@@ -31,13 +31,12 @@ Contained in the repo are:
     | 03.01.1970 | 2 | 2 |
 
 - User adjustments possible:
-    - People(.csv columns) to be considered in planning
-    - People that must necessarily be available in that timeframe (Function: i.e. hosting)
+    - People (.csv columns) to be considered in planning
+    - People that must necessarily be available in that timeframe (that are for example hosting an event)
     - Length of timeframe to be found
-    - Optional startdate
+    - Optional custom earliest startdate
 
-- Output: timeframe best fitting for given  constraints, people participating as a
-tuple
+- Output: timeframe best fitting for given constraints, people participating as a tuple
 
 
 ## Getting started
@@ -59,26 +58,27 @@ python scheduling_tool.py
 ```
 
 ## Usage examples
+- '-' signifies user input
 ### 1: Load own csv
 ```bash
 "Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
-Do you want to use a custom .csv (Enter to skip)? yes
+Do you want to use a custom .csv (Enter to skip)? - yes
 What file do you want to load? vacations_w.csv
 My search is based on data/vacations_w.csv. Let us begin!
-Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) yes
+Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
 
 Travel buddies are:['Barbie', 'Ken', 'Jasmine', 'Merida', 'Cinderella', 'Charming', 'Belle', 'Ariel', 'Pocahontas', 'Elsa', 'Aurora', 'Mulan']
 
-How many Travel Buddies do you want to add to go on vacation? 3
-How many people of those need be present? 0
+How many Travel Buddies do you want to add to go on vacation? - 3
+How many people of those need be present? - 0
 
 Please add names one after the other:
-Who else should be added that doesn't necessarily need to be there? Barbie
-Who else should be added that doesn't necessarily need to be there? Mulan
-Who else should be added that doesn't necessarily need to be there? Ariel
+Who else should be added that doesn't necessarily need to be there? - Barbie
+Who else should be added that doesn't necessarily need to be there? - Mulan
+Who else should be added that doesn't necessarily need to be there? - Ariel
 
 The total timeframe available is: 2023-07-20 00:00:00 to 2023-10-15 00:00:00
-For how long should the people be available (Enter to use default (6 days))? 4 days
+For how long should the people be available (Enter to use default (6 days))? - 4 days
 
 What is the starting date I should start searching from (Enter to use default)?
 
@@ -112,7 +112,7 @@ Here's also up to 3 best fitting solutions:
 ### 3: Choose constraint: necessary people (default csv)
 ```bash
 "Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
-Do you want to use a custom .csv (Enter to skip)? [ Enter ]
+Do you want to use a custom .csv (Enter to skip)? - [ Enter ]
 My search is based on data/vacations.csv. Let us begin!
 Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
 
@@ -144,7 +144,7 @@ Here's also up to 3 best fitting solutions:
 ### 4: Constraint violation found (default csv)
 ```bash
 "Hello! I am a scheduling tool made to find a timeframe that fits all people specified in the following.
-Do you want to use a custom .csv (Enter to skip)? [ Enter ]
+Do you want to use a custom .csv (Enter to skip)? - [ Enter ]
 My search is based on data/vacations.csv. Let us begin!
 Do you want to specify persons and times? (choose from used csv or press Enter to use defaults) - yes
 
@@ -169,7 +169,7 @@ What is the starting date I should start searching from (Enter to use default)? 
 
 There is no solution with your constraints.
 
-Should I re-run the search with a smaller time window (Enter to skip)? [ Enter ]"
+Should I re-run the search with a smaller time window (Enter to skip)? - [ Enter ]"
 ```
 
 ## Authors and Contact
